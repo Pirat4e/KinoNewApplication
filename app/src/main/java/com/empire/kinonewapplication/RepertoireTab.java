@@ -45,6 +45,7 @@ public class RepertoireTab extends ListFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         listView = (ListView) mActivity.findViewById(android.R.id.list);
+        listView = getListView();
         adapter = new KinoAdapter(mActivity, R.layout.list_item_view);
         listView.setAdapter(adapter);
 
