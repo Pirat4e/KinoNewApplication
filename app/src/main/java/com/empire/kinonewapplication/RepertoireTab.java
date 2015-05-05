@@ -26,7 +26,7 @@ import com.google.gson.Gson;
  */
 public class RepertoireTab extends ListFragment {
     private static final String TAG = RepertoireTab.class.getSimpleName();
-    private static final String URL = "http://3dkinobitola.com/?json=get_category_posts&slug=Repertoar&status=publish";
+    private static final String URL = "http://example.com/?json=get_category_posts&slug=Repertoire&status=publish";
 
     ListView listView;
     KinoAdapter adapter;
