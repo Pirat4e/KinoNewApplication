@@ -25,8 +25,8 @@ import com.google.gson.Gson;
  * Created by Ivanco on 04.05.2015.
  */
 public class ArchiveTab extends ListFragment {
-    private static final String TAG = RepertoireTab.class.getSimpleName();
-    private static final String URL = "http://3dkinobitola.com/?json=get_category_posts&slug=Arhiva&count=15";
+    private static final String TAG = ArchiveTab.class.getSimpleName();
+    private static final String URL = "http://example.com/?json=get_category_posts&slug=Archive&count=15";
 
     ProgressBar progressBar;
 
