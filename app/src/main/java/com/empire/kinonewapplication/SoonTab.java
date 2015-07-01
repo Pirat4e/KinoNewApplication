@@ -33,30 +33,15 @@ public class SoonTab extends ListFragment {
     ListView listView;
     KinoAdapter adapter;
 
-    private Activity mActivity;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.soon_layout, container, false);
-
-        return view;
-
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        listView = (ListView) mActivity.findViewById(android.R.id.list);
-        listView = getListView();
-        adapter = new KinoAdapter(mActivity, R.layout.list_item_view);
-        listView.setAdapter(adapter);
-
-
+     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        adapter = new KinoAdapter(getActivity(), R.layout.list_item_view);
         StringRequest movieReq = new StringRequest(URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d(TAG, response.toString());
+
                         Wrap wrap = new Gson().fromJson(response, Wrap.class);
                         for (Post post : wrap.getPosts()) {
                             adapter.add(post);
@@ -67,17 +52,22 @@ public class SoonTab extends ListFragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getActivity(), "No internet connection",
+                        Toast.LENGTH_LONG).show();
             }
         });
 
         AppController.getInstance().addToRequestQueue(movieReq);
 
     }
-
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mActivity = activity;
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.soon_layout, container, false);
+        getActivity().getWindow().setBackgroundDrawable(null);
+        listView = (ListView) view.findViewById(android.R.id.list);
+
+        listView.setAdapter(adapter);
+        return view;
+
     }
 }
